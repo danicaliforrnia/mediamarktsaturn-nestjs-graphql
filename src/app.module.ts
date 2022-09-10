@@ -4,6 +4,8 @@ import { DatabaseConfigModule } from './config/database-config/database-config.m
 import { AppConfigModule } from './config/app-config/app-config.module';
 import { GraphqlProviderModule } from './providers/graphql-provider.module';
 import { DatabaseProviderModule } from './providers/database-provider.module';
+import { GraphqlConfigModule } from './config/graphql-config/graphql-config.module';
+import { OrdersModule } from './api/orders/orders.module';
 
 @Module({
     imports: [
@@ -13,8 +15,10 @@ import { DatabaseProviderModule } from './providers/database-provider.module';
         }),
         AppConfigModule,
         DatabaseConfigModule,
+        GraphqlConfigModule,
         GraphqlProviderModule,
         DatabaseProviderModule,
+        OrdersModule,
     ],
     controllers: [],
     providers: [],
