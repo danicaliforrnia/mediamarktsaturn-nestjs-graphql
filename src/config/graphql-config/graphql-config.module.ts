@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { DatabaseConfigService } from './database-config.service';
+import { GraphqlConfigService } from './graphql-config.service';
 import { ConfigModule } from '@nestjs/config';
 import configuration from './configuration';
 
@@ -9,7 +9,7 @@ import configuration from './configuration';
             load: [configuration],
         }),
     ],
-    providers: [DatabaseConfigService],
-    exports: [DatabaseConfigService],
+    providers: [GraphqlConfigService],
+    exports: [GraphqlConfigService],
 })
-export class DatabaseConfigModule {}
+export class GraphqlConfigModule {}
