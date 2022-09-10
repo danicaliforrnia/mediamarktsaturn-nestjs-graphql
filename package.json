@@ -1,8 +1,16 @@
 {
   "name": "mediamarktsaturn-nestjs-graphql",
-  "version": "0.0.1",
-  "description": "",
-  "author": "",
+  "version": "1.0.0",
+  "description": "GraphQL API built with NestJs framework for a technical assessment at MediaMarktSaturn",
+  "author": {
+    "name": "Daniel Stefanelli",
+    "email": "daniel.stefanelli.h@gmail.com"
+  },
+  "keywords": [
+    "NestJs",
+    "GrapQL",
+    "API"
+  ],
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
@@ -18,7 +26,9 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "docker:init": "docker-compose -f docker-compose.yml up -d",
+    "docker:down": "docker-compose -f docker-compose.yml down --rmi all --volumes"
   },
   "dependencies": {
     "@nestjs/apollo": "^10.1.0",
@@ -26,11 +36,16 @@
     "@nestjs/core": "^8.0.0",
     "@nestjs/graphql": "^10.1.1",
     "@nestjs/platform-express": "^8.0.0",
+    "@nestjs/typeorm": "^9.0.1",
     "apollo-server-express": "^3.10.2",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.13.2",
     "graphql": "^16.6.0",
+    "pg": "^8.8.0",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
-    "rxjs": "^7.2.0"
+    "rxjs": "^7.2.0",
+    "typeorm": "^0.3.9"
   },
   "devDependencies": {
     "@nestjs/cli": "^8.0.0",
