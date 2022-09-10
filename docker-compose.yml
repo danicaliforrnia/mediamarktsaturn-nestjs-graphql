@@ -1,0 +1,21 @@
+version: '3.5'
+
+services:
+  postgres:
+    build: docker/postgres/
+    image: mediamarktstaurn-nestjs-graphql-postgresdb
+    container_name: mediamarktstaurn-database
+    volumes:
+      - postgres-database:/var/lib/postgresql/data
+    env_file:
+      - .env
+    environment:
+      DATABASE_USER: ${DATABASE_USER}
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+      DATABASE_NAME: ${DATABASE_NAME}
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - ${DATABASE_PORT}:${DATABASE_PORT}
+
+volumes:
+  postgres-database:
