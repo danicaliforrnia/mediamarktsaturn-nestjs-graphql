@@ -17,11 +17,7 @@ export class OrdersService {
     }
 
     async findById(id: number): Promise<OrderEntity> {
-        const order = await this.ordersRepository.findOne({
-            where: {
-                id,
-            },
-        });
+        const order = await this.ordersRepository.findOneBy({ id });
         if (!order) {
             throw new OrderNotFoundException();
         }
@@ -32,11 +28,7 @@ export class OrdersService {
         id,
         status,
     }: UpdateOrderStatusDto): Promise<OrderEntity> {
-        const order = await this.ordersRepository.findOne({
-            where: {
-                id,
-            },
-        });
+        const order = await this.ordersRepository.findOneBy({ id });
         if (!order) {
             throw new OrderNotFoundException();
         }
