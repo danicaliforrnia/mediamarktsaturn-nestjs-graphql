@@ -7,6 +7,10 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
+type Mutation {
+  updateOrderStatus(status: UpdateOrderStatusDto!): ReadOrderDto!
+}
+
 type Query {
   order(id: Int!): ReadOrderDto!
   orders: [ReadOrderDto!]!
@@ -19,4 +23,9 @@ type ReadOrderDto {
   status: String!
   totalAmount: Float!
   updatedAt: DateTime!
+}
+
+input UpdateOrderStatusDto {
+  id: Int!
+  status: String!
 }
