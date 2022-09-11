@@ -37,5 +37,5 @@ export class ItemEntity {
     @ManyToMany(() => OrderEntity, (order) => order.items, {
         eager: false,
     })
-    orders: OrderEntity[];
+    orders?: OrderEntity[];
 }

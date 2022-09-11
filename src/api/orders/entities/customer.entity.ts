@@ -23,7 +23,7 @@ export class CustomerEntity {
         type: 'varchar',
         nullable: false,
     })
-    last_name: string;
+    lastName: string;
 
     @Column({
         name: 'username',
@@ -62,5 +62,5 @@ export class CustomerEntity {
         cascade: false,
         orphanedRowAction: 'delete',
     })
-    categories: OrderEntity[];
+    orders?: OrderEntity[];
 }
