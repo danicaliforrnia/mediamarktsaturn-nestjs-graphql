@@ -6,9 +6,11 @@ import { CustomerEntity } from './entities/customer.entity';
 import { ItemEntity } from './entities/item.entity';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { OrderNotFoundException } from './errors/order-not-found.exception';
+import { Repository } from 'typeorm';
 
 describe('OrdersService', () => {
     let service: OrdersService;
+    let ordersRepository: Repository<OrderEntity>;
     const customer: CustomerEntity = {
         id: 1,
         firstName: 'John',
@@ -65,6 +67,9 @@ describe('OrdersService', () => {
         }).compile();
 
         service = module.get<OrdersService>(OrdersService);
+        ordersRepository = module.get<Repository<OrderEntity>>(
+            getRepositoryToken(OrderEntity),
+        );
     });
 
     it('should be defined', () => {
@@ -90,8 +95,14 @@ describe('OrdersService', () => {
     it('should update order', async () => {
         const orderToUpdate = { ...orders[0] };
         const newStatus = OrderStatusEnum.COMPLETE;
+        const spySave = jest.spyOn(ordersRepository, 'save');
         const response = await service.updateStatus({
             id: orderToUpdate.id,
+            status: newStatus,
+        });
+        expect(spySave).toHaveBeenCalledTimes(1);
+        expect(spySave).toHaveBeenCalledWith({
+            ...orderToUpdate,
             status: newStatus,
         });
         expect(response.id).toEqual(orderToUpdate.id);
