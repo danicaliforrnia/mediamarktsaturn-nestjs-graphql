@@ -2,52 +2,15 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { OrdersService } from './orders.service';
 import { OrderEntity } from './entities/order.entity';
 import { OrderStatusEnum } from './entities/order-status.enum';
-import { CustomerEntity } from './entities/customer.entity';
-import { ItemEntity } from './entities/item.entity';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { OrderNotFoundException } from './errors/order-not-found.exception';
 import { Repository } from 'typeorm';
+import { orders } from '../../tests/mock-data';
+import { mockOrdersRepository } from '../../tests/mock-implementations';
 
 describe('OrdersService', () => {
     let service: OrdersService;
     let ordersRepository: Repository<OrderEntity>;
-    const customer: CustomerEntity = {
-        id: 1,
-        firstName: 'John',
-        lastName: 'Doe',
-        username: 'john.doe@email.com',
-        phoneNumber: '+0 000000000',
-        addressLine1: 'line 1',
-        addressLine2: 'line 2',
-    };
-    const item: ItemEntity = {
-        id: 1,
-        name: 'Item1',
-        description: 'Description1',
-        price: 10,
-    };
-    const orders: OrderEntity[] = [
-        {
-            id: 1,
-            orderNumber: 12345,
-            totalAmount: 100,
-            status: OrderStatusEnum.IN_PROGRESS,
-            items: [item],
-            customer,
-            createdAt: new Date(),
-            updatedAt: new Date(),
-        },
-        {
-            id: 2,
-            orderNumber: 12346,
-            totalAmount: 20,
-            status: OrderStatusEnum.OPEN,
-            items: [item],
-            customer,
-            createdAt: new Date(),
-            updatedAt: new Date(),
-        },
-    ];
 
     beforeEach(async () => {
         const module: TestingModule = await Test.createTestingModule({
@@ -55,13 +18,7 @@ describe('OrdersService', () => {
                 OrdersService,
                 {
                     provide: getRepositoryToken(OrderEntity),
-                    useValue: {
-                        find: jest.fn().mockResolvedValue(orders),
-                        findOneBy: jest.fn().mockImplementation(({ id }) => {
-                            return orders.find((order) => order.id === id);
-                        }),
-                        save: jest.fn().mockImplementation((order) => order),
-                    },
+                    useValue: mockOrdersRepository,
                 },
             ],
         }).compile();
