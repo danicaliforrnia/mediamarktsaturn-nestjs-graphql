@@ -6,7 +6,6 @@ import { getRepositoryToken } from '@nestjs/typeorm';
 import { OrderEntity } from '../src/api/orders/entities/order.entity';
 import { mockOrdersRepository } from '../src/tests/mock-implementations';
 import { orders } from '../src/tests/mock-data';
-import { GraphqlProviderModule } from '../src/providers/graphql-provider.module';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver } from '@nestjs/apollo';
 
