@@ -5,7 +5,7 @@ export interface JsonTextProps<T> {
 }
 
 const JsonText = <T extends object>({ data }: JsonTextProps<T>) => (
-    <pre>{JSON.stringify(data, null, 2)}</pre>
+    <pre data-testid="json-text">{JSON.stringify(data, null, 2)}</pre>
 );
 
 export default JsonText;

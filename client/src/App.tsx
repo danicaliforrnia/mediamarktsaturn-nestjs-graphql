@@ -11,7 +11,7 @@ function App() {
     const [orderId, setOrderId] = useState<number>();
     return (
         <div className="App">
-            <body className="app-body">
+            <main className="app-body">
             <Card sx={{minWidth: '40vw', minHeight: '40vh'}}>
                 <CardHeader
                     title=" Search Order"
@@ -51,7 +51,7 @@ function App() {
                     </Grid>
                 </CardContent>
             </Card>
-            </body>
+            </main>
         </div>
     );
 }
