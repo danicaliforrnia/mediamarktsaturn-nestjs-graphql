@@ -2,6 +2,7 @@ import { CustomerEntity } from '../api/orders/entities/customer.entity';
 import { ItemEntity } from '../api/orders/entities/item.entity';
 import { OrderEntity } from '../api/orders/entities/order.entity';
 import { OrderStatusEnum } from '../api/orders/entities/order-status.enum';
+import { OrderItemEntity } from '../api/orders/entities/order_item.entity';
 
 export const customer: CustomerEntity = {
     id: 1,
@@ -18,13 +19,18 @@ export const item: ItemEntity = {
     description: 'Description1',
     price: 10,
 };
+export const orderItem: OrderItemEntity = {
+    item: item,
+    quantity: 10,
+    createdAt: new Date(),
+    updatedAt: new Date(),
+};
 export const orders: OrderEntity[] = [
     {
         id: 1,
         orderNumber: 12345,
-        totalAmount: 100,
         status: OrderStatusEnum.IN_PROGRESS,
-        items: [item],
+        orderItems: [orderItem],
         customer,
         createdAt: new Date(),
         updatedAt: new Date(),
@@ -32,9 +38,8 @@ export const orders: OrderEntity[] = [
     {
         id: 2,
         orderNumber: 12346,
-        totalAmount: 20,
         status: OrderStatusEnum.OPEN,
-        items: [item],
+        orderItems: [orderItem],
         customer,
         createdAt: new Date(),
         updatedAt: new Date(),

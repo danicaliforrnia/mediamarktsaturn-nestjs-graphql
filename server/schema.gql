@@ -16,13 +16,25 @@ type Query {
   orders: [ReadOrderDto!]!
 }
 
+type ReadItemDto {
+  description: String!
+  id: Int!
+  name: String!
+  price: Float!
+}
+
 type ReadOrderDto {
   createdAt: DateTime!
   id: Int!
+  orderItems: [ReadOrderItemDto!]
   orderNumber: Int!
   status: String!
-  totalAmount: Float!
   updatedAt: DateTime!
+}
+
+type ReadOrderItemDto {
+  item: ReadItemDto!
+  quantity: Int!
 }
 
 input UpdateOrderStatusDto {

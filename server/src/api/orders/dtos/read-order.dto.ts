@@ -1,6 +1,7 @@
 import { Exclude, Expose } from 'class-transformer';
 import { OrderStatusEnum } from '../entities/order-status.enum';
-import { Field, Float, Int, ObjectType } from '@nestjs/graphql';
+import { Field, Int, ObjectType } from '@nestjs/graphql';
+import { ReadOrderItemDto } from './read-order-item.dto';
 
 @Exclude()
 @ObjectType()
@@ -13,13 +14,15 @@ export class ReadOrderDto {
     @Expose()
     readonly orderNumber: number;
 
-    @Field(() => Float)
-    @Expose()
-    readonly totalAmount: number;
-
     @Field()
     @Expose()
     readonly status: OrderStatusEnum;
+
+    @Field(() => [ReadOrderItemDto], {
+        nullable: true,
+    })
+    @Expose()
+    readonly orderItems?: ReadOrderItemDto[];
 
     @Field()
     @Expose()

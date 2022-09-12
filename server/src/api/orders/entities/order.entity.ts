@@ -3,15 +3,14 @@ import {
     CreateDateColumn,
     Entity,
     JoinColumn,
-    JoinTable,
-    ManyToMany,
     ManyToOne,
+    OneToMany,
     PrimaryGeneratedColumn,
     UpdateDateColumn,
 } from 'typeorm';
 import { OrderStatusEnum } from './order-status.enum';
 import { CustomerEntity } from './customer.entity';
-import { ItemEntity } from './item.entity';
+import { OrderItemEntity } from './order_item.entity';
 
 @Entity('order')
 export class OrderEntity {
@@ -23,19 +22,10 @@ export class OrderEntity {
 
     @Column({
         name: 'order_number',
-        type: 'float',
+        type: 'int',
         nullable: false,
     })
     orderNumber: number;
-
-    @Column({
-        name: 'total_amount',
-        type: 'decimal',
-        nullable: false,
-        precision: 10,
-        scale: 2,
-    })
-    totalAmount: number;
 
     @Column({
         name: 'status',
@@ -56,16 +46,13 @@ export class OrderEntity {
     })
     customer: CustomerEntity;
 
-    @ManyToMany(() => ItemEntity, (item) => item.orders, {
+    @OneToMany(() => OrderItemEntity, (orderItem) => orderItem.order, {
         eager: true,
-        cascade: true,
+        cascade: false,
+        persistence: false,
+        orphanedRowAction: 'delete',
     })
-    @JoinTable({
-        name: 'items_in_orders',
-        joinColumn: { name: 'order_id', referencedColumnName: 'id' },
-        inverseJoinColumn: { name: 'item_id', referencedColumnName: 'id' },
-    })
-    items: ItemEntity[];
+    orderItems?: OrderItemEntity[];
 
     @CreateDateColumn({
         name: 'created_at',
