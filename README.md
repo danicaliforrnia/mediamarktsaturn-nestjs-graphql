@@ -58,6 +58,8 @@ Apollo Client library.
    ```sh
     npm run docker:init
    ```
+   
+> Note: env variables are taken from .env file.
 
 6. run migrations to create database tables   
 
@@ -105,7 +107,7 @@ decorators.
     npm run start
    ```
    
-![](https://github.com/danicaliforrnia/mediamarktsaturn-nestjs-graphql/client.gif)
+![](client.gif)
 
 ## Contributing
 
