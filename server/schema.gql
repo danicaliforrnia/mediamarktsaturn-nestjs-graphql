@@ -1,0 +1,43 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Mutation {
+  updateOrderStatus(status: UpdateOrderStatusDto!): ReadOrderDto!
+}
+
+type Query {
+  order(id: Int!): ReadOrderDto!
+  orders: [ReadOrderDto!]!
+}
+
+type ReadItemDto {
+  description: String!
+  id: Int!
+  name: String!
+  price: Float!
+}
+
+type ReadOrderDto {
+  createdAt: DateTime!
+  id: Int!
+  orderItems: [ReadOrderItemDto!]
+  orderNumber: Int!
+  status: String!
+  updatedAt: DateTime!
+}
+
+type ReadOrderItemDto {
+  item: ReadItemDto!
+  quantity: Int!
+}
+
+input UpdateOrderStatusDto {
+  id: Int!
+  status: String!
+}
